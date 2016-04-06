@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/menu.css' />
+  </head>
+  <body>
+    <div class='cssmenu'>
+	     <ul>
+	        <li class='active'>
+            <a href='/'>
+              <span>Home</span>
+            </a>
+          </li>
+	        <li>
+            <a href='/profile'>
+              <span>Profile</span>
+            </a>
+          </li>
+	        <li>
+            <a href='/messages'>
+              <span>Messages</span>
+            </a>
+          </li>
+          <li>
+            <a href='/setting'>
+              <span>Setting</span>
+            </a>
+          </li>
+	        <li class='last'>
+            <a href='/logout'>
+              <span>Log Out</span>
+            </a>
+          </li>
+	        <form class="form-wrapper cf">
+			          <input type="text" placeholder="Search here..." required>
+			          <button type="submit">Search</button>
+	        </form>
+      </ul>
+    </div>
+    <% if (user) { %>
+<div class="column_right">
+  <% if (user.linkedin.username) { %>
+  <h4>Welcome <%=user.linkedin.username%></h4>
+  <br>
+  <% } %>
+  <% if (user.facebook.name) { %>
+  <h4>Welcome <%=user.facebook.name%></h4>
+  <br>
+  <% } %>
+  <% if (user.linkedin.id) { %>
+  <a href="<%=user.linkedin.linkedinProfile%>">
+    <img src="<%=user.linkedin.pictureUrl%>" alt="Photo du profile">
+  </a>
+  <br>
+  <br>
+  Id : <%=user.linkedin.id%>
+  <br>
+  Name : <%=user.linkedin.firstName%>
+  <br>
+  Family Name : <%=user.linkedin.lastName%>
+  <br>
+  E-mail Adress : <%=user.linkedin.emailAddress%>
+  <br>
+  Location : <%=user.linkedin.country%>
+  <br>
+  <% } %>
+  <% if (user.local.password) { %>
+    <a href="">
+      <img src="" alt="Photo du profile">
+    </a>
+    <br>
+    <br>
+    Id :
+    <br>
+    Name : <%=user.username%>
+    <br>
+    Family Name :
+    <br>
+    E-mail Adress :
+    <br>
+    Location :
+    <br>
+  <% } %>
+</div>
+    <% } %>
+<div class="column_center">
+  <!-- here we switch if there is no user-->
+<% if (user) { %>
+  <p> You are currently logged in as <%=user.username%></p>
+  <a href="/logout"> Logout</a>
+  <a href="/profile"> profile</a>
+    <% } %>
+    <% if (!user) { %>
+  <a href="/login"> Login</a>
+  <br>
+  <a href="/register"> Register</a> <br>
+  <a href="/auth/linkedin">
+    <img src='/images/Sign-In-Large---Default.png'>
+  </a>
+  <br>
+  <a href="/auth/facebook"> facebook logging in </a>
+  <br>
+  <a href="/auth/google"> Google logging in </a>
+  <% } %>
+</div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/menu.css' />
+    <link rel='stylesheet' href='/stylesheets/message.css' />
+  </head>
+  <body>
+    <div class='cssmenu'>
+	     <ul>
+	        <li >
+            <a href='/'>
+              <span>Home</span>
+            </a>
+          </li>
+	        <li>
+            <a href='/profile'>
+              <span>Profile</span>
+            </a>
+          </li>
+	        <li class='active'>
+            <a href='/message'>
+              <span>Messages</span>
+            </a>
+          </li>
+          <li>
+            <a href='/setting'>
+              <span>Setting</span>
+            </a>
+          </li>
+	        <li class='last'>
+            <a href='/logout'>
+              <span>Log Out</span>
+            </a>
+          </li>
+	        <form class="form-wrapper cf">
+			          <input type="text" placeholder="Search here..." required>
+			          <button type="submit">Search</button>
+	        </form>
+      </ul>
+    </div>
+ <!-- Menu -->
+
+  <div class="column_center">
+    <div class="messagerie">
+      <div class="left_mess">
+        <div class="recherche">
+          <form method="post" action="#">
+            <input type="text" name="message" placeholder="search here ">
+            <div class="BtnRech">
+              <input type="submit" value="send">
+            </div>
+          </form>
+        </div>
+
+        <% messagesto.forEach(function(message){%>
+                <div class="fromWho" id = "<%=message.to%>" onclick="getMessages(this)">
+                  <img>
+                  <p ><%=message.to%></p>
+                </div>
+        <% });%>
+        <script>
+        function getMessages(element){
+          var value = element.id;
+            alert(value);
+        }
+        </script>
+      </div>
+
+      <div class="right_mess">
+        <%  messages.forEach(function(message){%>
+          <% if (message.to === messageWith.to){%>
+            <% if (message.from === user.username){ %>
+            <div class="messagefrom">
+              <img>
+              <div class="message">
+                <%=message.to %>  : <%=message.contain %>
+              </div>
+            </div>
+            <% }; %>
+          <% };%>
+          <% if (message.from === messageWith.from){%>
+            <% if (message.to === user.username){ %>
+            <div class="messageto">
+              <img>
+              <div class="message">
+                <%=message.contain %>
+              </div>
+            </div>
+            <% };%>
+          <% };%>
+        <% }); %>
+
+        </form>
+      </div>
+      <div class="sendMessages">
+        <form method="post" action="/sendMessage">
+          <input type="text" name="message" placeholder="type your message ">
+          <input type="text" name="messageto" placeholder="to !! ">
+            <input type="submit" value="send">
+          </form>
+      </div>
+    </div>
+
+    <!-- here we switch if there is no user-->
+  </div>
+
+</body>
+</html>

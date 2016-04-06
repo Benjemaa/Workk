@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/menu.css' />
+  </head>
+  <body >
+    <% if (user){ %>
+    <div class='cssmenu'>
+       <ul>
+          <li>
+            <a href='/'>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class='active'>
+            <a href='/profile'>
+              <span>Profile</span>
+            </a>
+          </li>
+          <li>
+            <a href='/messages'>
+              <span>Messages</span>
+            </a>
+          </li>
+          <li>
+            <a href='/setting'>
+              <span>Setting</span>
+            </a>
+              <ul>
+                <li><a href='/profileModif'>profile</a></li>
+                <li> Linking </li>
+              </ul>
+          </li>
+          <li class='last'>
+            <a href='/logout'>
+              <span>Log Out</span>
+            </a>
+          </li>
+          <form class="form-wrapper cf">
+                <input type="text" placeholder="Search here..." required>
+                <button type="submit">Search</button>
+          </form>
+      </ul>
+    </div>
+    <!-- Fin barre principale / debut de main  -->
+
+    <div class="column_center">
+      <h4>You are currently logged in as <%=user.username%></h4>
+      <% if (user.facebook.id) {%>
+        <div class="contain">
+
+        ~FB~ Id : <%=user.facebook.id%>
+        <br>
+        ~FB~ username : <%=user.facebook.username%>
+        <br>
+      </div>
+        <% }if (user.local.username) {%>
+          <div class="contain">
+
+          <br>
+          Name : <%=user.local.username%>
+          <br>
+          Email: <%=user.local.email %>
+
+        </div>
+        <% }if (user.google.name){ %>
+          <div class="contain">
+
+          <h4 > Google </h4>
+          ~Gg~Id :<%=user.google.id%>
+          <br>
+          ~Gg~Name :<%=user.google.name %>
+          <br>
+          ~Gg~Email :<%=user.google.email %>
+        </div>
+          <% }%>
+      <% if (user.linkedin.id) {%>
+        <div class="contain">
+       <br>
+       <a href="<%=user.linkedin.linkedinProfile%>">
+         <img src="<%=user.linkedin.pictureUrl%>" alt="Photo du profile">
+       </a>
+       <br>
+       <br>
+       ~LI~ Id : <%=user.linkedin.id%>
+       <br>
+       ~LI~Name : <%=user.linkedin.firstName%>
+       <br>
+       ~LI~Family Name : <%=user.linkedin.lastName%>
+       <br>
+       ~LI~E-mail Adress : <%=user.linkedin.emailAddress%>
+       <br>
+       ~LI~headline  : <%=user.linkedin.headline%>
+       <br>
+         ~LI~industry : <%=user.linkedin.industry%>
+       <br>
+       ~LI~current-share : <%=user.linkedin.currentShare%>
+       <br>
+       ~LI~numConnections : <%=user.linkedin.numConnections%>
+       <br>
+       ~LI~summary : <%=user.linkedin.summary%>
+       <br>
+       ~LI~specialties : <%=user.linkedin.specialties%>
+       <br>
+       ~LI~Location : <%=user.linkedin.country%>
+       <br>
+    </div>
+    <% }%>
+  </div>
+
+  <!-- column_right -->
+<div class="column_right">
+  <% if (!user.local.username){%>
+      <a href="#"> Link with Local </a>
+      <br>
+  <%}  %>
+  <% if (!user.linkedin.id){%>
+      <a href="/connect/linkedin"> Link with Linkedin </a>
+      <br>
+  <%}  %>
+  <% if (!user.facebook.id){%>
+      <a href="/connect/facebook"> Link with facebook </a>
+      <br>
+  <%}  %>
+  <% if (!user.google.id){%>
+      <a href="/connect/google"> Link with google </a>
+      <br>
+  <%}  %>
+</div>
+<%} %>
+
+    <% if (!user) { %>
+      <div class='cssmenu'>
+         <ul>
+            <li class="active , last">
+              <a href='/'>
+                <span>Home</span>
+              </a>
+            </li>
+            <form class="form-wrapper cf">
+                  <input type="text" placeholder="Name..." required>
+                  <button type="submit">Search</button>
+            </form>
+          </ul>
+        </div>
+        <div class="column_center">
+      <h3> You are not connected</h3>
+    </div>
+      <% } %>
+  </body>
+</html>

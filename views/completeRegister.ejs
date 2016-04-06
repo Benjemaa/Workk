@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+<div class="barrePrincipale">
+   Register Page
+    <ul>
+        <li>
+          <a href="/logout">Acceuil</a>
+        </li>
+      </ul>
+</div>
+<div class="main">
+        <p> lead Say something worthwhile here.</p>
+        <br>
+        <form  action="completeRegister" method="post">
+          UserName : <%=user.local.username %>
+          <br>
+          Email :<input type='text' name="email">
+          <br>
+          <input type='submit' value="Submit">
+            <input  type="reset" value="Cancel">
+        </form>
+</div>
+  </body>
+</html>

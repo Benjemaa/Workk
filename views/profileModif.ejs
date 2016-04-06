@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/menu.css' />
+  </head>
+  <body >
+    <% if (user){ %>
+    <div class='cssmenu'>
+       <ul>
+          <li>
+            <a href='/'>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class='active'>
+            <a href='/profile'>
+              <span>Profile</span>
+            </a>
+          </li>
+          <li>
+            <a href='#'>
+              <span>Messages</span>
+            </a>
+          </li>
+          <li>
+            <a href='/setting'>
+              <span>Setting</span>
+            </a>
+              <ul>
+                <li><a href='/profileModif'>profile</a></li>
+                <li> XXXXx</li>
+              </ul>
+          </li>
+          <li class='last'>
+            <a href='/logout'>
+              <span>Log Out</span>
+            </a>
+          </li>
+          <form class="form-wrapper cf">
+                <input type="text" placeholder="Search here..." required>
+                <button type="submit">Search</button>
+          </form>
+      </ul>
+    </div>
+    <!-- Fin barre principale / debut de main  -->
+
+    <div class="column_center">
+      <h4><%=user.username%></h4>
+      <% if (user.facebook.id) {%>
+        <form method="post" action="/modifFacebook">
+          <div class="contain">
+          ~FB~ Id : <%=user.facebook.id%>
+          <br>
+          ~FB~ username : <%=user.facebook.username%>
+          <br>
+        </form>
+      </div>
+        <% }if (user.local.username) {%>
+          <div class="contain">
+            <form method="post" action="modifAccount">
+              <br>
+              Name : <input type="text" value="<%=user.local.username%>" name="localName" >
+              <br>
+              Email: <input type="text" value="<%=user.local.email %>" name="localEmail" >
+              <br>
+              <input type="Submit" value="Modifier">
+            </form>
+        </div>
+        <% }if (user.google.name){ %>
+          <div class="contain">
+
+          <h4 > Google </h4>
+          ~Gg~Name :<%=user.google.name %>
+          <br>
+          ~Gg~Email :<%=user.google.email %>
+          <br>
+
+        </div>
+          <% }%>
+      <% if (user.linkedin.id) {%>
+        <div class="contain">
+
+            <br>
+            ~LI~Name : <%=user.linkedin.firstName%>"
+            <br>
+             ~LI~Family Name :<%=user.linkedin.lastName%>"
+             <br>
+             ~LI~E-mail Adress :<%=user.linkedin.emailAddress%>"
+             <br>
+             ~LI~specialties : <%=user.linkedin.specialties%>"
+             <br>
+             ~LI~Location : <%=user.linkedin.country%>"
+             <br>
+
+          </div>
+    <% }%>
+  </div>
+<%} %>
+
+    <% if (!user) { %>
+      <div class='cssmenu'>
+         <ul>
+            <li class="active , last">
+              <a href='/'>
+                <span>Home</span>
+              </a>
+            </li>
+            <form class="form-wrapper cf">
+                  <input type="text" placeholder="Name..." required>
+                  <button type="submit">Search</button>
+            </form>
+          </ul>
+        </div>
+        <div class="column_center">
+      <h3> You are not connected</h3>
+    </div>
+      <% } %>
+  </body>
+</html>
